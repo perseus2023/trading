@@ -1,0 +1,281 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>macro_cycles_timing</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-07-21"><meta name="DC.source" content="macro_cycles_timing.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0 auto;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin-left:300px; margin-right:300px; margin-top:50px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:right; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+h4 { padding:0px; margin:0px 0px 5px; font-family:sans-serif; font-size:0.8em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th {padding:7px 20px; text-align:right; vertical-align:middle; border: 2px solid #d6d4d4; font-weight:bold; align:middle; }
+table td {padding:7px 20px; text-align:right; vertical-align:top; border:2px solid #d6d4d4; margin-left:auto;align:middle; }
+
+
+
+
+
+  </style></head><body><div class="content"> <h1><center>宏观周期择时策略</h1></center></html>
+<html>根据流动性和经济周期的关系确定股市的买点和卖点</html>
+<html><br> <br> <br></html>
+<html><br> <br> <br></html>
+<html><br> <br> <br></html>
+<html><br> <br> <br><img vspace="5" hspace="5" src="macro_cycles_timing_01.png" alt=""> <img vspace="5" hspace="5" src="macro_cycles_timing_02.png" alt=""> <img vspace="5" hspace="5" src="macro_cycles_timing_03.png" alt=""> <img vspace="5" hspace="5" src="macro_cycles_timing_04.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function macro_cycles_timing()
+
+str='宏观周期择时策略';
+disp(['<html> <h1><center>',str,'</h1></center>' '</html>'])
+str='根据流动性和经济周期的关系确定股市的买点和卖点';
+disp(['<html>',str, '</html>'])
+
+warning('off')
+input_dir='./macro_cycle';
+begin_date='2002-01-31';
+end_date=datestr(lastmonthend(today()),'yyyy-mmm-dd');
+[~,~,zzqz_data]=xlsread(fullfile(input_dir,'原始数据.xlsx'),'zzqz');
+exp_dates1=datenum(zzqz_data(:,1));
+zzqz1=cell2vect(zzqz_data(:,2));
+[zzqz2 ,exp_dates2]=get_index_price('000985',begin_date,end_date);
+last_ind=find(exp_dates2>exp_dates1(end),1,'first');
+zzqz=[zzqz1;zzqz2(last_ind:end)];
+exp_dates=[exp_dates1;exp_dates2(last_ind:end)];
+
+% ym=unique(coldatestr(exp_dates,'yyyymm'));
+% num_m=numel(ym);
+zzqz=zzqz/zzqz(1);
+[m_dates,m_ind]=endofmonth(exp_dates);
+
+
+
+[crb_raw, crb_dates]=get_macro_data('CRB现货指数:综合');
+[zz1_raw, zz1_dates]=get_macro_data('中债国债到期收益率:1年');
+[zz10_raw, zz10_dates]=get_macro_data('中债国债到期收益率:10年');
+[m1_raw, m1_dates]=get_macro_data('M1:同比');
+[m2_raw, m2_dates]=get_macro_data('M2:同比');
+[cpi_raw, cpi_dates]=get_macro_data('CPI:当月同比');
+[ppi_raw, ppi_dates]=get_macro_data('PPI:全部工业品当月同比');
+[sr_raw, sr_dates]=get_macro_data('社会融资规模存量:同比');
+
+% data is only available for last month
+last_ind=find(m_dates<=ppi_dates(end),1,'last');
+% ym=ym(1:last_ind);
+m_dates=m_dates(1:last_ind);
+m_ind=m_ind(1:last_ind);
+num_m=numel(m_dates);
+crb=zeros(1,num_m);% log yoy
+zz10=zeros(1,num_m); % ten year debt ytm
+zz1=zeros(1,num_m); % one year debt ytm
+m1=zeros(1,num_m); % m1 yoy
+m2=zeros(1,num_m); % m2 yoy
+m12=zeros(1,num_m); % m1 yoy-m2 yoy
+ppi=zeros(1,num_m); % ppi
+cpi=zeros(1,num_m); % cpi
+sr=zeros(1,num_m)+NaN;% total borrow yoy
+
+for im=1
+    today_ind=find(crb_dates>=m_dates(im),1,'first');
+    oya_ind=find(crb_dates>=m_dates(im)-365,1,'first');
+    crb(im)=log(crb_raw(today_ind))-log(crb_raw(oya_ind));
+    
+    month_ind=find(ppi_dates>=m_dates(im),1,'first');ppi(im)=ppi_raw(month_ind-1,1);% uses last month data
+    month_ind=find(cpi_dates>=m_dates(im),1,'first');cpi(im)=cpi_raw(month_ind-1,1);% uses last month data
+    month_ind=find(sr_dates>=m_dates(im),1,'first');
+    if ~isempty(month_ind)&&month_ind>1
+        sr(im)=sr_raw(month_ind-1,1);% uses last month data
+    end
+    month_ind=find(m1_dates>=m_dates(im),1,'first');m1(im)=m1_raw(month_ind-1,1);% uses last month data
+    month_ind=find(m2_dates>=m_dates(im),1,'first');m2(im)=m2_raw(month_ind-1,1);% uses last month data
+    month_ind=find(zz1_dates>=m_dates(im),1,'first');zz1(im)=zz1_raw(month_ind,1);% uses up to date data
+    month_ind=find(zz10_dates>=m_dates(im),1,'first');zz10(im)=zz10_raw(month_ind,1);% uses up to date data
+    m12(im)=m1(im)-m2(im);
+end
+
+for im=2:num_m
+    today_ind=find(crb_dates>=m_dates(im),1,'first');
+    oya_ind=find(crb_dates>=m_dates(im)-365,1,'first');
+    crb(im)=log(crb_raw(today_ind))-log(crb_raw(oya_ind));
+    
+    month_ind=find(ppi_dates>=m_dates(im-1),1,'first');ppi(im)=ppi_raw(month_ind,1);% uses last month data
+    month_ind=find(cpi_dates>=m_dates(im-1),1,'first');cpi(im)=cpi_raw(month_ind,1);% uses last month data
+    month_ind=find(sr_dates>=m_dates(im-1),1,'first');
+    if ~isempty(month_ind)
+        sr(im)=sr_raw(month_ind,1);% uses last month data
+    end
+    month_ind=find(m1_dates>=m_dates(im-1),1,'first');m1(im)=m1_raw(month_ind,1);% uses last month data
+    month_ind=find(m2_dates>=m_dates(im-1),1,'first');m2(im)=m2_raw(month_ind,1);% uses last month data
+    month_ind=find(zz1_dates>=m_dates(im),1,'first');zz1(im)=zz1_raw(month_ind,1);% uses up to date data
+    month_ind=find(zz10_dates>=m_dates(im),1,'first');zz10(im)=zz10_raw(month_ind,1);% uses up to date data
+    m12(im)=m1(im)-m2(im);
+    
+end
+
+ppi2=detrend(ppi);
+cpi2=detrend(cpi);
+crb2=detrend(crb);
+sr2=zeros(size(sr))+NaN;
+sr2(14:end)=detrend(sr(14:end));
+zz102=detrend(zz10);
+
+ppi3=(ppi2-mean(ppi2))/std(ppi2);
+cpi3=(cpi2-mean(cpi2))/std(cpi2);
+crb3=(crb2-mean(crb2))/std(crb2);
+sr3=zeros(size(sr2))+NaN;
+sr3(14:end)=(sr2(14:end)-mean(sr2(14:end)))/std(sr2(14:end));
+sr3(1:13)=sr3(14);
+zz103=(zz102-mean(zz102))/std(zz102);
+
+mzzqz=zzqz(m_ind);
+x=[ppi3' cpi3' crb3' sr3' zz103'];
+[coeff,score,latent] = pca(x);
+eco=score(:,1);
+
+figure('Position',[500 500 2000,800]);
+hold on;grid on;grid minor;title(['Economy Indices ' datestr(exp_dates(end),'yyyy-mm-dd')]);
+plot(m_dates,ppi3,'r','Linewidth',1.2);
+plot(m_dates,cpi3,'g','Linewidth',1.2);
+plot(m_dates,crb3,'b','Linewidth',1.2);
+plot(m_dates,sr3,'y','Linewidth',1.2);
+plot(m_dates,zz103,'cyan','Linewidth',1.2)
+plot(m_dates,eco,'kREPLACE_WITH_DASH_DASH','Linewidth',1.2)
+% plot(m_dates,mzzqz,'k','Linewidth',1);datetick;
+plot(exp_dates,zzqz/zzqz(1),'k','Linewidth',1);datetick;
+legend({'PPI','CPI','CRB','SR','10Y Bond YTM','Economical Intensity','Market Index'},'Location','NorthWest');
+str='<br> <br> <br>';
+disp(['<html>',str,'</html>'])
+
+m1t=detrend(m1);
+m2t=detrend(m2);
+m12t=detrend(m12);
+zz1t=detrend(zz1*-1);
+[m1s,~]=movavg(m1t,3,5);
+[m2s,~]=movavg(m2t,3,5);
+[zz1s,~]=movavg(zz1t,3,5);
+[m12s,~]=movavg(m12t,3,5);
+
+m13=(m1s-mean(m1s))/std(m1s);
+m23=(m2s-mean(m2s))/std(m2s);
+zz13=(zz1s-mean(zz1s))/std(zz1s);
+m123=(m12s-mean(m12s))/std(m12s);
+x2=[m13 m23 m123 zz13];
+[coeff2,score2,latent2] = pca(x2);
+liq=score2(:,1);
+rliq=liq-eco; % remainder liquidity
+
+figure('Position',[500 500 2000,800]);hold on;grid on;grid minor;title(['Liquidity Indices' datestr(m_dates(end),'yyyy-mm-dd')]);
+plot(m_dates,m13,'r','Linewidth',1.2);
+plot(m_dates,m23,'g','Linewidth',1.2);
+plot(m_dates,m123,'b','Linewidth',1.2);
+plot(m_dates,zz13,'y','Linewidth',1.2);
+plot(m_dates,liq,'kREPLACE_WITH_DASH_DASH','Linewidth',1.2)
+plot(m_dates,mzzqz,'k','Linewidth',1);
+legend({'M1','M2','M1-M2','1YBond YTM','Liquidity','Financial Liquidity','Market Index'},'Location','NorthWest');datetick;
+str='<br> <br> <br>';
+disp(['<html>',str,'</html>'])
+
+figure('Position',[500 500 2000,800]);hold on;grid on;grid minor;title('Macro Indices');
+yyaxis left;
+plot(m_dates,liq,'b','Linewidth',1.5);
+plot(m_dates,rliq,'g','Linewidth',1.5);
+plot(m_dates,eco,'r','Linewidth',1.5);
+yyaxis right;
+plot(m_dates,log(mzzqz),'k','Linewidth',1);
+legend({'Liquidity','Financial Liquidity','Economy','Market Index'},'Location','NorthWest');datetick;
+str='<br> <br> <br>';
+disp(['<html>',str,'</html>'])
+
+liq_pct=pec(liq);
+eco_pct=pec(eco);
+bot_label=zeros(1,num_m);
+top_label=zeros(1,num_m);
+for im=13:num_m
+    if eco_pct(im)<min(eco_pct(im-2:im-1))&&liq_pct(im)<0.2
+        bot_label(im)=1;
+    end
+    if liq_pct(im)>0.5&&liq_pct(im)<liq_pct(im-1)
+        top_label(im)=1;
+    end
+end
+figure('Position',[500 500 2000,800]);hold on;grid on;grid minor;title('Timming Results');
+yyaxis left;
+plot(m_dates,liq_pct,'g');
+plot(m_dates,eco_pct,'r');
+yyaxis right;
+plot(m_dates,log(mzzqz),'cyan','Linewidth',1.5);
+bot_ind=find(bot_label);
+plot(m_dates(bot_ind),log(mzzqz(bot_ind)),'rd','Linewidth',1.5);
+plot(m_dates(find(top_label==1)),log(mzzqz(top_label==1)),'k+','Linewidth',1.5);
+legend({'liqidity percentile','economical percentile','zzqz','buy points','sell points'},'Location','NorthWest');%plot(dif_pct)
+datetick;
+str='<br> <br> <br>';
+disp(['<html>',str,'</html>'])
+
+pos_label=zeros(1,num_m);
+neg_label=zeros(1,num_m);
+for im=10:num_m
+    if bot_label(im)==1
+        pos_label(im)=1;
+    elseif top_label(im)==1
+        neg_label(im)=1;
+    else
+        pos_label(im)=pos_label(im-1);
+        neg_label(im)=neg_label(im-1);
+    end
+end
+warning('on')
+end
+##### SOURCE END #####
+--></body></html>
