@@ -1,0 +1,366 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>publish_divg_trading_zz800</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-07-22"><meta name="DC.source" content="publish_divg_trading_zz800.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0 auto;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin-left:300px; margin-right:300px; margin-top:50px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:right; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+h4 { padding:0px; margin:0px 0px 5px; font-family:sans-serif; font-size:0.8em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th {padding:7px 20px; text-align:right; vertical-align:middle; border: 2px solid #d6d4d4; font-weight:bold; align:middle; }
+table td {padding:7px 20px; text-align:right; vertical-align:top; border:2px solid #d6d4d4; margin-left:auto;align:middle; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#3">2012&#33267;&#20170;&#25910;&#30410;&#29575;</a></li><li><a href="#4">&#20998;&#24180;&#25910;&#30410;&#29575;</a></li><li><a href="#5">&#20998;&#26376;&#25910;&#30410;&#29575;</a></li><li><a href="#6">&#26368;&#26032;&#25104;&#20221;&#32929;</a></li></ul></div> <h1><center>中证800反转交易策略</h1></center></html>
+<html><br> <br> <br></html>
+<html>策略根据市场趋势，寻找中证800成份股中低位的票</html>
+<html><br> <br> <br><img vspace="5" hspace="5" src="publish_divg_trading_zz800_01.png" alt=""> <h2 id="3">2012&#33267;&#20170;&#25910;&#30410;&#29575;</h2> <h3><center>收益率统计</h3></center></html>
+<html><table border="2" cellpadding="8" align="center" cellspacing="2">
+<tr><td align="right"> </td><td align="right">年化收益率（%）</td><td align="right">最大回撤（%）</td><td align="right">波动率（%）</td><td align="right">夏普率  </td><td align="right">月度胜率（%）</td></tr>
+<tr><td align="right">策略</td><td align="right">13.01</td><td align="right">15.95</td><td align="right">12.89</td><td align="right">1.04</td><td align="right">82.07</td></tr>
+<tr><td align="right">沪深300</td><td align="right">4.50</td><td align="right">46.70</td><td align="right">22.23</td><td align="right">0.32</td><td align="right">45.08</td></tr>
+</table></html>
+<html> <h4><center>年化单边换手率（%） 454.51%，统计截至：2023-07-21</h4></center></html>
+<html><br> <br> <br><h2 id="4">&#20998;&#24180;&#25910;&#30410;&#29575;</h2> <h3><center>策略分年收益率</h3></center></html>
+<html><table border="2" cellpadding="8" align="center" cellspacing="2">
+<tr><td align="right"> </td><td align="right">策略收益率（%）</td><td align="right">沪深300收益率（%）</td><td align="right">策略最大回撤（%）</td><td align="right">沪深300最大回撤（%）</td></tr>
+<tr><td align="right">2012</td><td align="right">9.14</td><td align="right">9.75</td><td align="right">7.27</td><td align="right">22.41</td></tr>
+<tr><td align="right">2013</td><td align="right">8.73</td><td align="right">-7.65</td><td align="right">5.26</td><td align="right">22.16</td></tr>
+<tr><td align="right">2014</td><td align="right">15.11</td><td align="right">51.66</td><td align="right">5.54</td><td align="right">10.43</td></tr>
+<tr><td align="right">2015</td><td align="right">62.36</td><td align="right">5.58</td><td align="right">7.68</td><td align="right">43.48</td></tr>
+<tr><td align="right">2016</td><td align="right">13.13</td><td align="right">-11.28</td><td align="right">9.33</td><td align="right">23.51</td></tr>
+<tr><td align="right">2017</td><td align="right">4.40</td><td align="right">21.78</td><td align="right">6.80</td><td align="right">6.07</td></tr>
+<tr><td align="right">2018</td><td align="right">-8.97</td><td align="right">-25.31</td><td align="right">15.14</td><td align="right">31.88</td></tr>
+<tr><td align="right">2019</td><td align="right">24.79</td><td align="right">36.07</td><td align="right">8.19</td><td align="right">13.49</td></tr>
+<tr><td align="right">2020</td><td align="right">8.05</td><td align="right">27.21</td><td align="right">6.77</td><td align="right">16.08</td></tr>
+<tr><td align="right">2021</td><td align="right">15.30</td><td align="right">-5.20</td><td align="right">6.17</td><td align="right">18.19</td></tr>
+<tr><td align="right">2022</td><td align="right">7.11</td><td align="right">-21.63</td><td align="right">13.65</td><td align="right">28.98</td></tr>
+<tr><td align="right">2023</td><td align="right">3.40</td><td align="right">-1.28</td><td align="right">6.41</td><td align="right">9.81</td></tr>
+</table></html>
+<html> <h4><center>统计截至：2023-07-21</h4></center></html>
+<html><br> <br> <br><h2 id="5">&#20998;&#26376;&#25910;&#30410;&#29575;</h2><img vspace="5" hspace="5" src="publish_divg_trading_zz800_02.png" alt=""> <h2 id="6">&#26368;&#26032;&#25104;&#20221;&#32929;</h2> <h3><center>最新持仓权重，多头仓位54.06%</h3></center></html>
+<html><table border="2" cellpadding="8" align="center" cellspacing="2">
+<tr><td align="right">序号</td><td align="right">代码</td><td align="right">简称</td><td align="right">权重（%）</td><td align="right">买入日期</td><td align="right">持仓收益率（%）</td></tr>
+<tr><td align="right">1</td><td align="right">300363</td><td align="right">博腾股份</td><td align="right">3.33</td><td align="right">2023-07-13</td><td align="right">-8.56</td></tr>
+<tr><td align="right">2</td><td align="right">603267</td><td align="right">鸿远电子</td><td align="right">3.32</td><td align="right">2023-06-20</td><td align="right">-5.42</td></tr>
+<tr><td align="right">3</td><td align="right">688561</td><td align="right">奇安信-U</td><td align="right">2.90</td><td align="right">2023-06-26</td><td align="right">-18.40</td></tr>
+<tr><td align="right">4</td><td align="right">601888</td><td align="right">中国中免</td><td align="right">2.77</td><td align="right">2023-06-26</td><td align="right">-2.47</td></tr>
+<tr><td align="right">5</td><td align="right">300759</td><td align="right">康龙化成</td><td align="right">2.71</td><td align="right">2023-03-02</td><td align="right">-35.72</td></tr>
+<tr><td align="right">6</td><td align="right">300699</td><td align="right">光威复材</td><td align="right">2.68</td><td align="right">2023-07-13</td><td align="right">-3.02</td></tr>
+<tr><td align="right">7</td><td align="right">300751</td><td align="right">迈为股份</td><td align="right">2.62</td><td align="right">2023-06-29</td><td align="right">15.65</td></tr>
+<tr><td align="right">8</td><td align="right">601155</td><td align="right">新城控股</td><td align="right">2.43</td><td align="right">2023-05-29</td><td align="right">4.89</td></tr>
+<tr><td align="right">9</td><td align="right">002180</td><td align="right">纳思达</td><td align="right">2.39</td><td align="right">2023-07-03</td><td align="right">-9.98</td></tr>
+<tr><td align="right">10</td><td align="right">300015</td><td align="right">爱尔眼科</td><td align="right">2.30</td><td align="right">2023-07-20</td><td align="right">2.58</td></tr>
+<tr><td align="right">11</td><td align="right">688006</td><td align="right">杭可科技</td><td align="right">2.21</td><td align="right">2023-06-27</td><td align="right">2.49</td></tr>
+<tr><td align="right">12</td><td align="right">300741</td><td align="right">华宝股份</td><td align="right">2.14</td><td align="right">2023-07-17</td><td align="right">-1.47</td></tr>
+<tr><td align="right">13</td><td align="right">603127</td><td align="right">昭衍新药</td><td align="right">2.08</td><td align="right">2023-07-17</td><td align="right">0.92</td></tr>
+<tr><td align="right">14</td><td align="right">601012</td><td align="right">隆基股份</td><td align="right">2.05</td><td align="right">2023-07-10</td><td align="right">-3.37</td></tr>
+<tr><td align="right">15</td><td align="right">603290</td><td align="right">斯达半导</td><td align="right">1.83</td><td align="right">2023-07-04</td><td align="right">-10.21</td></tr>
+<tr><td align="right">16</td><td align="right">603160</td><td align="right">汇顶科技</td><td align="right">1.79</td><td align="right">2023-07-17</td><td align="right">4.28</td></tr>
+<tr><td align="right">17</td><td align="right">002739</td><td align="right">万达电影</td><td align="right">1.72</td><td align="right">2023-06-27</td><td align="right">13.04</td></tr>
+<tr><td align="right">18</td><td align="right">601336</td><td align="right">新华保险</td><td align="right">1.71</td><td align="right">2023-07-12</td><td align="right">-2.30</td></tr>
+<tr><td align="right">19</td><td align="right">603517</td><td align="right">绝味食品</td><td align="right">1.66</td><td align="right">2023-05-24</td><td align="right">-8.55</td></tr>
+<tr><td align="right">20</td><td align="right">603613</td><td align="right">国联股份</td><td align="right">1.66</td><td align="right">2023-05-08</td><td align="right">-10.17</td></tr>
+<tr><td align="right">21</td><td align="right">002791</td><td align="right">坚朗五金</td><td align="right">1.45</td><td align="right">2023-06-02</td><td align="right">-11.23</td></tr>
+<tr><td align="right">22</td><td align="right">002607</td><td align="right">中公教育</td><td align="right">1.21</td><td align="right">2023-07-14</td><td align="right">-2.52</td></tr>
+<tr><td align="right">23</td><td align="right">002387</td><td align="right">维信诺</td><td align="right">1.06</td><td align="right">2023-06-19</td><td align="right">-1.43</td></tr>
+<tr><td align="right">24</td><td align="right">600258</td><td align="right">首旅酒店</td><td align="right">0.90</td><td align="right">2023-07-11</td><td align="right">-1.53</td></tr>
+<tr><td align="right">25</td><td align="right">600556</td><td align="right">天下秀</td><td align="right">0.68</td><td align="right">2023-01-12</td><td align="right">-2.74</td></tr>
+<tr><td align="right">26</td><td align="right">688099</td><td align="right">晶晨股份</td><td align="right">0.67</td><td align="right">2023-07-17</td><td align="right">-5.50</td></tr>
+<tr><td align="right">27</td><td align="right">600160</td><td align="right">巨化股份</td><td align="right">0.49</td><td align="right">2023-07-10</td><td align="right">15.86</td></tr>
+<tr><td align="right">28</td><td align="right">002271</td><td align="right">东方雨虹</td><td align="right">0.45</td><td align="right">2023-06-02</td><td align="right">-1.11</td></tr>
+<tr><td align="right">29</td><td align="right">603259</td><td align="right">药明康德</td><td align="right">0.44</td><td align="right">2023-06-19</td><td align="right">-2.87</td></tr>
+<tr><td align="right">30</td><td align="right">002439</td><td align="right">启明星辰</td><td align="right">0.42</td><td align="right">2023-07-13</td><td align="right">4.05</td></tr>
+</table></html>
+<html> <h4><center>统计截至：2023-07-21</h4></center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>300363  博腾股份  医药</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/300363 博腾股份.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>603267  鸿远电子  国防军工</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/603267 鸿远电子.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>688561  奇安信-U  计算机</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/688561 奇安信-U.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>601888  中国中免  消费者服务</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/601888 中国中免.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>300759  康龙化成  医药</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/300759 康龙化成.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>300699  光威复材  国防军工</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/300699 光威复材.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>300751  迈为股份  机械</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/300751 迈为股份.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>601155  新城控股  房地产</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/601155 新城控股.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>002180  纳思达  电子</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/002180 纳思达.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>300015  爱尔眼科  医药</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/300015 爱尔眼科.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>688006  杭可科技  机械</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/688006 杭可科技.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>300741  华宝股份  食品饮料</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/300741 华宝股份.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>603127  昭衍新药  医药</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/603127 昭衍新药.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>601012  隆基股份  电力设备及新能源</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/601012 隆基股份.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>603290  斯达半导  电子</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/603290 斯达半导.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>603160  汇顶科技  电子</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/603160 汇顶科技.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>002739  万达电影  传媒</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/002739 万达电影.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>601336  新华保险  非银行金融</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/601336 新华保险.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>603517  绝味食品  食品饮料</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/603517 绝味食品.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>603613  国联股份  计算机</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/603613 国联股份.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>002791  坚朗五金  建材</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/002791 坚朗五金.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>002607  中公教育  消费者服务</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/002607 中公教育.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>002387  维信诺  电子</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/002387 维信诺.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>600258  首旅酒店  消费者服务</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/600258 首旅酒店.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>600556  天下秀  传媒</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/600556 天下秀.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>688099  晶晨股份  电子</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/688099 晶晨股份.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>600160  巨化股份  基础化工</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/600160 巨化股份.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>002271  东方雨虹  建材</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/002271 东方雨虹.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>603259  药明康德  医药</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/603259 药明康德.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br></html>
+<html> <h1><center>002439  启明星辰  计算机</h1></center></html>
+<html> <center><img src="https://www.deeperquant.com:8888//divg_trading_zz800/optimized/002439 启明星辰.png" align="middle" width="3125" height="2000"></a></p> </center></html>
+<html><br> <br> <br><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function publish_divg_trading_zz800()
+
+str='中证800反转交易策略';
+disp(['<html> <h1><center>',str,'</h1></center>' '</html>'])
+insert_break;
+str='策略根据市场趋势，寻找中证800成份股中低位的票';
+disp(['<html>',str, '</html>'])
+% str='PE区间判定';
+% disp(['<html>',str, '</html>'])
+input_dir='W:\divg_trading_zz800';
+warning('off')
+load(fullfile(input_dir,'results'),'res');
+begin_date='2012-01-01';
+exp_dates=res.exp_dates;
+end_date=datestr(exp_dates(end),'yyyy-mm-dd');
+% end_date='2022-10-23';
+begin_ind=find(exp_dates>=datenum(begin_date),1,'first');
+exp_dates=exp_dates(begin_ind:end);
+hs300=get_index_price('000300',begin_date,end_date);
+nav=res.nav(begin_ind:end);
+baseline=hs300/hs300(1);
+ane=compute_ane(nav,exp_dates);
+sp=sharpratio_daily(nav);
+mdd=max_retract(nav);
+wr=compute_wr_cash(nav,0.03,255);
+
+% [nav]=allpos2nav_simple(idx,reg_ind,w);
+% baseline=allpos2nav_simple(idx,reg_ind,bw);
+figure('Position',[500 500 2000,800]);
+yyaxis left;
+plot(exp_dates,log(nav),'r');hold on;
+plot(exp_dates,log(baseline),'b');
+yyaxis right;
+plot(exp_dates,res.long_pos(begin_ind:end),'cyan');
+% plot(exp_dates,res.short_pos(begin_ind:end),'g');
+grid on;grid minor;
+legend({'组合收益率','沪深300收益率','多头仓位'},'location','NorthWest');datetick;title(['年化收益率（%）: ' num2str(ane*100,'%3.1f')  '; 最大回撤（%）:' num2str(mdd*100,'%3.1f') '; 夏普率:' num2str(sp,'%0.2f')]);
+
+str='<br> <br> <br>';
+disp(['<html>',str,'</html>'])
+%% 2012至今收益率
+stats=cell(6,3);
+stats(1,2:3)={'策略','沪深300'};
+stats(2:6,1)={'年化收益率（%）','最大回撤（%）','波动率（%）','夏普率  ','月度胜率（%）'};
+stats(2:6,2)=num2cell([ane*100 mdd*100 hist_vol(nav)*100 sp wr*100]);
+stats(2:6,3)=num2cell([compute_ane(baseline,exp_dates)*100 max_retract(baseline)*100 hist_vol(baseline)*100 sharpratio_daily(baseline) compute_wr_cash(baseline,0.03,255)*100]);
+% stats_str=compute_string_table(stats');
+% makeHtmlTable(ones(size(stats_str)),stats_str);
+pos=res.pos(1:end-1,:);
+avg_to=compute_ptf_to(pos);
+showtable(stats','收益率统计',['年化单边换手率（%） ' num2str(avg_to*100/2,'%0.2f') '%，统计截至：' datestr(exp_dates(end),'yyyy-mm-dd')])
+%% 分年收益率
+num_years=numel(unique(year(exp_dates)));
+stats2=cell(1+num_years,5);
+stats2(1,2:end)={'策略收益率（%）','沪深300收益率（%）','策略最大回撤（%）','沪深300最大回撤（%）'};
+stats2(2:num_years+1,1)=cellfun(@num2str,num2cell([2012:2012+num_years-1]),'UniformOutput',false);
+stats2(2:num_years+1,2)=num2cell(compute_annual_rtn(nav,exp_dates)*100);
+stats2(2:num_years+1,3)=num2cell(compute_annual_rtn(baseline,exp_dates)*100);
+stats2(2:num_years+1,4)=num2cell(compute_annual_mdd(nav,exp_dates)*100);
+stats2(2:num_years+1,5)=num2cell(compute_annual_mdd(hs300,exp_dates)*100);
+% stats_str2=compute_string_table(stats2);
+% makeHtmlTable(ones(size(stats_str2)),stats_str2);
+showtable(stats2,'策略分年收益率',[ '统计截至：' datestr(exp_dates(end),'yyyy-mm-dd')])
+% str='<br> <br> <br>';
+% disp(['<html>',str,'</html>'])
+%% 分月收益率
+[mly_rtn , ~]=compute_monthly_rtn(nav,exp_dates);
+[baseline_rtn, mdates]=compute_monthly_rtn(hs300,exp_dates);
+figure('Position',[500 500 2000,800]);
+b=bar(datenum(mdates(end-11:end),'yyyymm'),[baseline_rtn(end-11:end)' mly_rtn(end-11:end)' ]*100,'grouped');datetick;
+legend({'沪深300月收益率（%）','策略月收益率（%）'},'location','NorthWest');
+ylabel('Monthly Return (%)');
+xlabel('Last 12 Months');
+xtips1 = b(1).XEndPoints;
+ytips1 = b(1).YEndPoints;
+labels1 = string(round(b(1).YData,2));
+text(xtips1,ytips1,labels1,'HorizontalAlignment','center','VerticalAlignment','bottom','FontSize',14)
+xtips2 = b(2).XEndPoints;
+ytips2 = b(2).YEndPoints;
+labels2 = string(round(b(2).YData,2));
+text(xtips2,ytips2,labels2,'HorizontalAlignment','center','VerticalAlignment','bottom','FontSize',14)
+grid on;grid minor;
+% str='<br> <br> <br>';
+% disp(['<html>',str,'</html>'])
+%% 最新成份股
+cur_holding=res.allstk(find(pos(:,end)~=0));
+num_h=numel(cur_holding);
+latest_holding=cell(num_h+1,6);
+latest_holding(1,1:6)={'序号','代码','简称','权重（%）','买入日期','持仓收益率（%）'};
+latest_holding(2:end,1)=cellfun(@num2str,num2cell([1:num_h]),'UniformOutput',false);
+latest_holding(2:end,2:3)=get_stock_name(cur_holding);
+% num_holding=numel(cur_holding);
+% if num_holding>30
+%     total_pos=sum(pos(:,end))*100;
+
+    latest_holding(2:end,4)=num2cell(pos(pos(:,end)~=0,end)*100);
+% else
+%     total_pos=sum(pos(:,end))/30*100;
+%     latest_holding(2:end,4)=num2cell(pos(pos(:,end)>0,end)/30*100);
+% end
+begin_dates=cell(num_h,1);
+buy_rtn=cell(num_h,1);
+allstk=res.allstk;
+[~,stk_ind]=ismember(cur_holding,allstk);
+idx=res.idx;
+for ih=1:num_h
+    if stk_ind(ih)>0
+        buy_ind=find(abs(pos(stk_ind(ih),1:end-1))==0,1,'last');
+        try
+        begin_dates{ih}=datestr(res.exp_dates(buy_ind),'yyyy-mm-dd');
+        catch me
+            disp(me)
+        end
+            
+        buy_rtn{ih}=(idx{stk_ind(ih)}.prc(end)/idx{stk_ind(ih)}.prc(buy_ind)-1)*100*(2*(pos(stk_ind(ih),end)>0)-1);
+    end
+end
+latest_holding(2:end,5)=begin_dates;
+latest_holding(2:end,6)=buy_rtn;
+latest_holding(2:end,2:end)=sortrows(latest_holding(2:end,2:end),3,'descend');
+
+% latest_holding=sortandcut(latest_holding,4,size(latest_holding,1)+1);
+% latest_str=compute_string_table(latest_holding);
+% str='title';
+% disp(['<html> <h3><center>',str,'</h3></center>' '</html>'])
+% makeHtmlTable(ones(size(latest_str)),latest_str);
+
+showtable(latest_holding,['最新持仓权重，多头仓位' num2str(res.long_pos(end)*100,'%0.2f')  '%'],['统计截至：' datestr(exp_dates(end),'yyyy-mm-dd')])
+citic_info=get_stock_citic(latest_holding(2:end,2));
+stock_name=latest_holding(2:end,2:3);
+for is=1:size(stock_name,1)
+    %     img_file=['W:\pb_bands\all\' stock_codes{is} '.png'];
+    img_file=['https://www.deeperquant.com:8888//divg_trading_zz800/optimized/' stock_name{is,1} ' ' stock_name{is,2} '.png'];
+    if exist(img_file,'file')||1
+        insert_title([citic_info{is,1} '  ' citic_info{is,2} '  '   citic_info{is,4}]);
+        insert_image(img_file,3125,2000);
+        insert_break;
+    end
+end
+end
+##### SOURCE END #####
+--></body></html>
