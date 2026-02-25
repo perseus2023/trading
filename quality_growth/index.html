@@ -1,0 +1,317 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>quality_growth_strategy</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-07-22"><meta name="DC.source" content="quality_growth_strategy.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0 auto;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin-left:300px; margin-right:300px; margin-top:50px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:right; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+h4 { padding:0px; margin:0px 0px 5px; font-family:sans-serif; font-size:0.8em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th {padding:7px 20px; text-align:right; vertical-align:middle; border: 2px solid #d6d4d4; font-weight:bold; align:middle; }
+table td {padding:7px 20px; text-align:right; vertical-align:top; border:2px solid #d6d4d4; margin-left:auto;align:middle; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#7">2009</a></li></ul></div><pre class="codeoutput">loading data complete
+removing zero entries
+checking
+</pre><pre class="codeoutput">loading global data susp_data
+</pre> <h1><center>高景气股票策略</h1></center>策略通过持仓高景气股票获得绝对收益</html>
+<html><br> <br> <br><img vspace="5" hspace="5" src="quality_growth_strategy_01.png" alt=""> <h2 id="7">2009</h2> <h3><center>收益率统计</h3></center></html>
+<html><table border="2" cellpadding="8" align="center" cellspacing="2">
+<tr><td align="right"> </td><td align="right">年化收益率（%）</td><td align="right">最大回撤（%）</td><td align="right">波动率（%）</td><td align="right">夏普率  </td><td align="right">月度胜率（%）</td></tr>
+<tr><td align="right">策略</td><td align="right">9.46</td><td align="right">12.82</td><td align="right">8.66</td><td align="right">1.12</td><td align="right">75.37</td></tr>
+<tr><td align="right">沪深300</td><td align="right">4.99</td><td align="right">46.70</td><td align="right">23.24</td><td align="right">0.33</td><td align="right">40.44</td></tr>
+</table></html>
+<html> <h4><center>统计截至：2023-07-21</h4></center></html>
+<html><br> <br> <br> <h3><center>策略分年收益率</h3></center></html>
+<html><table border="2" cellpadding="8" align="center" cellspacing="2">
+<tr><td align="right"> </td><td align="right">策略收益率（%）</td><td align="right">沪深300收益率（%）</td><td align="right">策略最大回撤（%）</td><td align="right">沪深300最大回撤（%）</td></tr>
+<tr><td align="right">2009</td><td align="right">24.83</td><td align="right">89.90</td><td align="right">5.43</td><td align="right">25.26</td></tr>
+<tr><td align="right">2010</td><td align="right">14.34</td><td align="right">-12.51</td><td align="right">5.95</td><td align="right">29.73</td></tr>
+<tr><td align="right">2011</td><td align="right">-3.55</td><td align="right">-25.01</td><td align="right">6.94</td><td align="right">31.64</td></tr>
+<tr><td align="right">2012</td><td align="right">12.92</td><td align="right">7.55</td><td align="right">4.69</td><td align="right">22.41</td></tr>
+<tr><td align="right">2013</td><td align="right">14.50</td><td align="right">-7.65</td><td align="right">3.69</td><td align="right">22.16</td></tr>
+<tr><td align="right">2014</td><td align="right">7.04</td><td align="right">51.66</td><td align="right">4.45</td><td align="right">10.43</td></tr>
+<tr><td align="right">2015</td><td align="right">23.69</td><td align="right">5.58</td><td align="right">11.90</td><td align="right">43.48</td></tr>
+<tr><td align="right">2016</td><td align="right">2.68</td><td align="right">-11.28</td><td align="right">8.02</td><td align="right">23.51</td></tr>
+<tr><td align="right">2017</td><td align="right">10.40</td><td align="right">21.78</td><td align="right">3.51</td><td align="right">6.07</td></tr>
+<tr><td align="right">2018</td><td align="right">-0.60</td><td align="right">-25.31</td><td align="right">9.42</td><td align="right">31.88</td></tr>
+<tr><td align="right">2019</td><td align="right">19.73</td><td align="right">36.07</td><td align="right">4.42</td><td align="right">13.49</td></tr>
+<tr><td align="right">2020</td><td align="right">22.89</td><td align="right">27.21</td><td align="right">5.85</td><td align="right">16.08</td></tr>
+<tr><td align="right">2021</td><td align="right">6.85</td><td align="right">-5.20</td><td align="right">7.93</td><td align="right">18.19</td></tr>
+<tr><td align="right">2022</td><td align="right">-8.65</td><td align="right">-21.63</td><td align="right">12.82</td><td align="right">28.98</td></tr>
+<tr><td align="right">2023</td><td align="right">-2.38</td><td align="right">-1.28</td><td align="right">5.79</td><td align="right">9.81</td></tr>
+</table></html>
+<html> <h4><center>统计截至：2023-07-21</h4></center></html>
+<html><br> <br> <br><img vspace="5" hspace="5" src="quality_growth_strategy_02.png" alt=""> <img vspace="5" hspace="5" src="quality_growth_strategy_03.png" alt="">  <h3><center>当前持仓</h3></center></html>
+<html><table border="2" cellpadding="8" align="center" cellspacing="2">
+<tr><td align="right">编号</td><td align="right">股票代码</td><td align="right">股票名称</td><td align="right">仓位</td><td align="right">买入日期</td><td align="right">持仓收益率（%）</td></tr>
+<tr><td align="right">1</td><td align="right">000568</td><td align="right">泸州老窖</td><td align="right">7.14</td><td align="right">2023-05-15</td><td align="right">5.13</td></tr>
+<tr><td align="right">2</td><td align="right">002568</td><td align="right">百润股份</td><td align="right">7.14</td><td align="right">2023-07-17</td><td align="right">-1.17</td></tr>
+<tr><td align="right">3</td><td align="right">002690</td><td align="right">美亚光电</td><td align="right">7.14</td><td align="right">2023-03-01</td><td align="right">-5.47</td></tr>
+<tr><td align="right">4</td><td align="right">002737</td><td align="right">葵花药业</td><td align="right">7.14</td><td align="right">2023-05-15</td><td align="right">-10.54</td></tr>
+<tr><td align="right">5</td><td align="right">300033</td><td align="right">同花顺</td><td align="right">7.14</td><td align="right">2023-07-03</td><td align="right">-8.02</td></tr>
+<tr><td align="right">6</td><td align="right">300354</td><td align="right">东华测试</td><td align="right">7.14</td><td align="right">2023-06-15</td><td align="right">-2.83</td></tr>
+<tr><td align="right">7</td><td align="right">300856</td><td align="right">科思股份</td><td align="right">7.14</td><td align="right">2023-07-03</td><td align="right">-3.41</td></tr>
+<tr><td align="right">8</td><td align="right">300861</td><td align="right">美畅股份</td><td align="right">7.14</td><td align="right">2023-05-15</td><td align="right">-1.11</td></tr>
+<tr><td align="right">9</td><td align="right">300896</td><td align="right">爱美客</td><td align="right">7.14</td><td align="right">2023-07-03</td><td align="right">-2.02</td></tr>
+<tr><td align="right">10</td><td align="right">600211</td><td align="right">西藏药业</td><td align="right">7.14</td><td align="right">2023-06-01</td><td align="right">-2.81</td></tr>
+<tr><td align="right">11</td><td align="right">600519</td><td align="right">贵州茅台</td><td align="right">7.14</td><td align="right">2023-05-15</td><td align="right">4.79</td></tr>
+<tr><td align="right">12</td><td align="right">600809</td><td align="right">山西汾酒</td><td align="right">7.14</td><td align="right">2023-02-01</td><td align="right">-25.04</td></tr>
+<tr><td align="right">13</td><td align="right">603369</td><td align="right">今世缘</td><td align="right">7.14</td><td align="right">2023-05-15</td><td align="right">-2.76</td></tr>
+<tr><td align="right">14</td><td align="right">603605</td><td align="right">珀莱雅</td><td align="right">7.14</td><td align="right">2022-11-01</td><td align="right">-8.14</td></tr>
+</table></html>
+<html> <h4><center>统计截至2023-07-21</h4></center></html>
+<html><br> <br> <br><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function quality_growth_strategy()
+% close all
+warning('off')
+output_dir='F:\matlab_projects\strategy\quality_growth';
+% control_dir='E:\update_control';
+stkpool_dir='E:\mat_database\stock_pool';
+mkdir(output_dir);
+begin_date=datenum('20090101','yyyymmdd');
+% end_date=today();
+end_date=asofdate();
+exp_dates=get_exp_dates(begin_date,end_date);
+factor_data_name='factor_data';
+uni_data_label=1;
+if ~exist(fullfile(stkpool_dir,[datestr(begin_date,'yyyy-mm-dd') '_' datestr(exp_dates(end),'yyyy-mm-dd') '_stkpool.mat']),'file')
+    [idx,allstk]=makestockpool_local(exp_dates(1),exp_dates(end));
+    save(fullfile(stkpool_dir,[datestr(begin_date,'yyyy-mm-dd') '_' datestr(exp_dates(end),'yyyy-mm-dd') '_stkpool']),'idx','allstk','exp_dates');
+else
+    load(fullfile(stkpool_dir,[datestr(begin_date,'yyyy-mm-dd') '_' datestr(exp_dates(end),'yyyy-mm-dd') '_stkpool']),'idx','allstk');
+end
+num_t=numel(exp_dates);
+[~,reg_ind]=mkregdates(datestr(exp_dates(1)),datestr(exp_dates(end)),exp_dates);
+info_ind=max(1,reg_ind-1);
+info_dates=exp_dates(info_ind);
+reg_dates=exp_dates(reg_ind);
+num_rd=numel(info_ind);
+factors{1}=32; % safety
+factors{2}=39; % epf1y;
+factors{3}=40; % roef1y;
+factors{4}=34; % dividend
+factors{5}=30; % profitability score
+factors{6}=37 ; % average revision
+factors{7}=38 ; % estimate diffusion
+hs300=get_index_price('000300',exp_dates(1),exp_dates(end));
+num_s=numel(idx);
+w=zeros(num_s+1,num_rd);
+all_uni_data=cell(1,num_rd);
+ptf=cell(1,num_rd);
+idx{num_s+1}.stockcode='cash';
+cash_rtn=ones(1,num_t)*0.03/365;
+idx{num_s+1}.prc=rtn2nav2(cash_rtn);
+%%
+for ir=1:num_rd
+    uni_codes=compute_universe(info_dates(ir));
+    uni_label=ismember(allstk,uni_codes);
+    all_uni_data{ir}=compute_stock_factors_local(datestr(info_dates(ir),'yyyy-mm-dd'),factors,allstk);
+    uni_data=all_uni_data{ir};
+    [~,pool_ind]=ismember(allstk,uni_data(:,1));
+    sel_label=zeros(num_s,1);
+    for is=1:num_s
+        %         if pool_ind(is)>0
+        if uni_label(is)==1&&pool_ind(is)>0
+            if uni_data{pool_ind(is),4}>=20&&uni_data{pool_ind(is),2}>=0.5&&uni_data{pool_ind(is),8}>=0.5
+                sel_label(is)=1;
+            end
+            
+        end
+    end
+    w(1:num_s,ir)=min(0.10,sel_label*0.33/(sum(sel_label)+eps));
+    w(num_s+1,ir)=1-sum(w(1:num_s,ir));
+    ptf{ir}=allstk(find(w(1:num_s,ir)>0.0001));
+    
+end
+
+if uni_data_label==1
+    save(fullfile(output_dir,factor_data_name),'all_uni_data');
+end
+%%
+[nav]=allpos2nav_simple(idx,reg_ind,w);
+ane=compute_ane(nav,exp_dates);
+mdd=max_retract(nav);
+sp=sharpratio_daily(nav);
+tr=zeros(1,num_rd);
+for ir=2:num_rd
+    tr(ir)=sum(abs(w(1:num_s,ir)-w(1:num_s,ir-1)));
+end
+ann_tr=sum(tr)/numel(exp_dates)*255;
+compute_annual_rtn(nav,exp_dates);
+wr=compute_wr_cash(nav,0.03,255);
+ws_long=w;
+sptf_long=ptf;
+save(fullfile(output_dir,'long_only'),'reg_dates','exp_dates','sptf_long','ws_long','nav' ,'allstk');
+%%
+str='高景气股票策略';
+disp(['<html> <h1><center>',str,'</h1></center>' '</html>'])
+%% 
+str='策略通过持仓高景气股票获得绝对收益';
+disp(['<html>',str, '</html>'])
+
+baseline=hs300/hs300(1);
+% [nav]=allpos2nav_simple(idx,reg_ind,w);
+% baseline=allpos2nav_simple(idx,reg_ind,bw);
+figure('Position',[500 500 2000,800]);
+plot(exp_dates,nav);hold on;plot(exp_dates,baseline);grid on;grid minor;legend({'净值','沪深300'},'location','NorthWest');datetick;title(['年化收益率 ' num2str(ane*100,'%3.1f')  '最大回撤：' num2str(mdd*100,'%3.1f') '夏普率:' num2str(sp,'%0.2f')]);
+
+str='<br> <br> <br>';
+disp(['<html>',str,'</html>'])
+%% 2009
+stats=cell(6,3);
+stats(1,2:3)={'策略','沪深300'};
+stats(2:6,1)={'年化收益率（%）','最大回撤（%）','波动率（%）','夏普率  ','月度胜率（%）'};
+stats(2:6,2)=num2cell([ane*100 mdd*100 hist_vol(nav)*100 sp wr*100]);
+stats(2:6,3)=num2cell([compute_ane(baseline,exp_dates)*100 max_retract(baseline)*100 hist_vol(baseline)*100 sharpratio_daily(baseline) compute_wr_cash(baseline,0.03,255)*100]);
+% stats_str=compute_string_table(stats');
+% makeHtmlTable(ones(size(stats_str)),stats_str);
+showtable(stats','收益率统计',['统计截至：' datestr(exp_dates(end),'yyyy-mm-dd')])
+%% 
+num_years=numel(unique(year(exp_dates)));
+stats2=cell(1+num_years,5);
+stats2(1,2:end)={'策略收益率（%）','沪深300收益率（%）','策略最大回撤（%）','沪深300最大回撤（%）'};
+stats2(2:num_years+1,1)=cellfun(@num2str,num2cell([2009:2009+num_years-1]),'UniformOutput',false);
+stats2(2:num_years+1,2)=num2cell(compute_annual_rtn(nav,exp_dates)*100);
+stats2(2:num_years+1,3)=num2cell(compute_annual_rtn(baseline,exp_dates)*100);
+stats2(2:num_years+1,4)=num2cell(compute_annual_mdd(nav,exp_dates)*100);
+stats2(2:num_years+1,5)=num2cell(compute_annual_mdd(hs300,exp_dates)*100);
+showtable(stats2,'策略分年收益率',[ '统计截至：' datestr(exp_dates(end),'yyyy-mm-dd')])
+% stats_str2=compute_string_table(stats2);
+% makeHtmlTable(ones(size(stats_str2)),stats_str2);
+% str='<br> <br> <br>';
+% disp(['<html>',str,'</html>'])
+%% 
+[mly_rtn , ~]=compute_monthly_rtn(nav,exp_dates);
+[baseline_rtn, mdates]=compute_monthly_rtn(hs300,exp_dates);
+figure('Position',[500 500 2000,800]);
+b=bar(datenum(mdates(end-11:end),'yyyymm'),[baseline_rtn(end-11:end)' mly_rtn(end-11:end)' ]*100,'grouped');datetick;
+legend({'策略','沪深300'});
+ylabel('Monthly Return (%)');
+xlabel('Last 12 Months');
+xtips1 = b(1).XEndPoints;
+ytips1 = b(1).YEndPoints;
+labels1 = string(round(b(1).YData,2));
+text(xtips1,ytips1,labels1,'HorizontalAlignment','center','VerticalAlignment','bottom','FontSize',14)
+xtips2 = b(2).XEndPoints;
+ytips2 = b(2).YEndPoints;
+labels2 = string(round(b(2).YData,2));
+text(xtips2,ytips2,labels2,'HorizontalAlignment','center','VerticalAlignment','bottom','FontSize',14)
+grid on;grid minor;
+% str='<br> <br> <br>';
+% disp(['<html>',str,'</html>'])
+%% 
+num_h=numel(ptf{end});
+latest_holding=cell(num_h+1,6);
+latest_holding(1,1:6)={'编号','股票代码','股票名称','仓位','买入日期','持仓收益率（%）'};
+latest_holding(2:end,1)=cellfun(@num2str,num2cell([1:num_h]),'UniformOutput',false);
+latest_holding(2:end,2:3)=get_stock_name(ptf{end});
+latest_holding(2:end,4)=num2cell(1/num_h*100);
+begin_dates=cell(num_h,1);
+buy_rtn=cell(num_h,1);
+[~,stk_ind]=ismember(ptf{end},allstk);
+for ih=1:num_h
+    if stk_ind(ih)>0
+        buy_ind=find(w(stk_ind(ih),1:end-1)<0.0001,1,'last')+1;
+        begin_dates{ih}=datestr(reg_dates(buy_ind),'yyyy-mm-dd');
+        buy_rtn{ih}=(idx{stk_ind(ih)}.prc(end)/idx{stk_ind(ih)}.prc(reg_ind(buy_ind))-1)*100;
+    end
+end 
+latest_holding(2:end,5)=begin_dates;
+latest_holding(2:end,6)=buy_rtn;
+% latest_str=compute_string_table(latest_holding);
+% str='title';
+% disp(['<html> <h3><center>',str,'</h3></center>' '</html>'])
+% makeHtmlTable(ones(size(latest_str)),latest_str);
+showtable(latest_holding,'当前持仓',['统计截至' datestr(exp_dates(end),'yyyy-mm-dd')])
+%%
+nav_record=cell(num_t,2);
+nav_record(:,1)=coldatestr(exp_dates);
+nav_record(:,2)=num2cell(nav);
+xlswrite(fullfile(output_dir,[end_date 'nav_record.xlsx']),nav_record);
+%%
+file_name=[end_date '_record.xlsx'];
+print_results=1;
+if print_results==1
+    record=cell(num_rd,5);
+    record(1,:)={'开始日期','结束日期','','',''};
+    it=2;
+    for ir=1:num_rd
+        if numel(ptf{ir})==0
+            record(it,1)={datestr(exp_dates(min(num_t,reg_ind(ir)+1)),'yyyymmdd')};
+            record(it,2)={datestr(reg_dates(min(num_rd,ir+1)),'yyyymmdd')};
+            %         it=it+1;
+        else
+            record(it:it+numel(ptf{ir})-1,1)={datestr(exp_dates(min(num_t,reg_ind(ir)+1)),'yyyymmdd')};
+            record(it:it+numel(ptf{ir})-1,2)={datestr(reg_dates(min(num_rd,ir+1)),'yyyymmdd')};
+            %             record(it:it+numel(ptf{ir})-1,3:4)=get_stock_name(ptf{ir});
+            it=it+numel(ptf{ir});
+        end
+    end
+    xlswrite(fullfile(output_dir,file_name),record);
+    xlswrite(fullfile(output_dir,[end_date 'stats.xlsx']),stats);
+    %     xlswrite(fullfile(output_dir,'major.xlsx'),major);
+end
+warning('on');
+end
+##### SOURCE END #####
+--></body></html>
